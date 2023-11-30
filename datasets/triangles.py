@@ -6,7 +6,7 @@ class Generate_Triangles:
     def __init__(self,image_height: int, image_width):
         self._image_height = image_height
         self._image_width = image_width
-    def _generate_image(self)-> np.ndarray[(np.short)]:
+    def _generate_image(self)-> np.ndarray[(np.uint8)]:
         new_image = Image.new("L", (self._image_width, self._image_height), "white")
         draw = ImageDraw.Draw(new_image)
         while True:
@@ -32,8 +32,8 @@ class Generate_Triangles:
         image_array = np.array(new_image)
         return image_array
 
-    def generate_dataset(self, n_triangles : int) -> np.ndarray[(np.short)]:
-        dataset = np.zeros([n_triangles,self._image_height,self._image_width], dtype=np.short)
+    def generate_dataset(self, n_triangles : int) -> np.ndarray[(np.uint8)]:
+        dataset = np.zeros([n_triangles,self._image_height,self._image_width], dtype=np.uint8)
         for idx in range (n_triangles):
             dataset[idx,:,:]= self._generate_image()
         return dataset
